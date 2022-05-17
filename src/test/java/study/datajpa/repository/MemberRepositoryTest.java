@@ -35,6 +35,8 @@ class MemberRepositoryTest {
     @PersistenceContext
     EntityManager em;
 
+    @Autowired MemberQueryRepository memberQueryRepository;
+
     @Test
     public void testMember() {
         Member member = new Member("memberA");
@@ -274,7 +276,7 @@ class MemberRepositoryTest {
     }
 
     @Test
-    public void lcok() {
+    public void lock() {
         //given
         Member member1 = new Member("member1", 10);
         memberRepository.save(member1);
@@ -283,5 +285,10 @@ class MemberRepositoryTest {
 
         //when
         List<Member> result = memberRepository.findLockByUsername("member1");
+    }
+
+    @Test
+    public void callCustom() {
+        List<Member> result = memberRepository.findMemberCustom();
     }
 }
